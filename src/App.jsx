@@ -1,23 +1,49 @@
 import Icon from "@ant-design/icons";
-import { Button, Card, Col, Divider, Grid, Input, Layout, Menu, Row  } from "antd";
+import {
+  Button,
+  Card,
+  Carousel,
+  Col,
+  Divider,
+  Drawer,
+  Grid,
+  Input,
+  Layout,
+  Menu,
+  Row,
+} from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import WhiteLogo from "./Components/Icons/WhiteLogo";
 import Sider from "antd/es/layout/Sider";
 import SideMenuHome from "./Components/Icons/SideMenuHome";
 import SideMenuTimeLine from "./Components/Icons/SideMenuTimeLine";
 import SideMenuAllGames from "./Components/Icons/SideMenuAllGames";
+import MusicIcon from "./Components/Icons/MusicIcon";
+import PokerIcon from "./Components/Icons/PokerIcon";
 import Meta from "antd/es/card/Meta";
+import { useState } from "react";
 
 const { useBreakpoint } = Grid;
 
-
 function App() {
   const WhiteLogoItem = (props) => <Icon component={WhiteLogo} {...props} />;
-  const SideMenuHomeItem = (props) => <Icon component={SideMenuHome} {...props} />;
-  const SideMenuTimeLineItem = (props) => <Icon component={SideMenuTimeLine} {...props} />;
-  const SideMenuAllGamesItem = (props) => <Icon component={SideMenuAllGames} {...props} />;
+  const SideMenuHomeItem = (props) => (
+    <Icon component={SideMenuHome} {...props} />
+  );
+  const SideMenuTimeLineItem = (props) => (
+    <Icon component={SideMenuTimeLine} {...props} />
+  );
+  const SideMenuAllGamesItem = (props) => (
+    <Icon component={SideMenuAllGames} {...props} />
+  );
+  const PokerIconItem = (props) => <Icon component={PokerIcon} {...props} />;
+
+  const MusicIconItem = (props) => <Icon component={MusicIcon} {...props} />;
   const screens = useBreakpoint();
   const isMobile = !screens.md;
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const showDrawer = () => setDrawerVisible(true);
+  const onClose = () => setDrawerVisible(false);
 
   const listSideMenu = [
     { key: 1, icon: <SideMenuHomeItem />, label: "Games Home" },
@@ -51,19 +77,35 @@ function App() {
           zIndex: 1,
           justifyContent: "space-between",
           backgroundColor: "rgba(0, 0, 0, 0.5)",
+          padding: "0 16px",
         }}
       >
         <WhiteLogoItem />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={["1"]}
-          style={{ backgroundColor: "transparent" }}
-          items={menuItem}
-        />
+        {isMobile ? (
+          <>
+            <Button type="text" style={{ color: "#fff" }} onClick={showDrawer}>
+              Menu
+            </Button>
+            <Drawer
+              title="Menu"
+              placement="right"
+              onClose={onClose}
+              open={drawerVisible}
+            >
+              <Menu mode="inline" theme="light" items={menuItem} />
+            </Drawer>
+          </>
+        ) : (
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={["1"]}
+            style={{ backgroundColor: "transparent" }}
+            items={menuItem}
+          />
+        )}
       </Header>
 
-      {/* Carousel */}
       <Content
         style={{
           overflow: "hidden",
@@ -81,128 +123,358 @@ function App() {
       {/* Body */}
       <Layout
         style={{
-          padding: "24px 50px",
+          padding: isMobile ? "24px 16px" : "24px 50px",
           backgroundColor: "#ffffff",
           justifyContent: "space-around",
         }}
       >
         <Row gutter={[16, 16]} style={{ justifyContent: "space-between" }}>
-          <Col span={6}>
-            <Sider
-              width="100%"
-              style={{
-                background: "#ffffff",
-              }}
-            >
-              <Input
-                placeholder="Search"
+          {!isMobile && (
+            <Col xs={24} md={6}>
+              <Sider
+                width="100%"
                 style={{
-                  borderLeft: "unset",
-                  borderRight: "unset",
-                  borderTop: "unset",
-                  borderRadius: "unset",
+                  background: "#ffffff",
                 }}
-              />
-              <Menu
-                mode="vertical"
-                defaultSelectedKeys={["0"]}
-                items={listSideMenu}
-                theme="light"
-                style={{ border: "unset" }}
-              />
-            </Sider>
-          </Col>
+              >
+                <Input
+                  placeholder="Search"
+                  style={{
+                    borderLeft: "unset",
+                    borderRight: "unset",
+                    borderTop: "unset",
+                    borderRadius: "unset",
+                  }}
+                />
+                <Menu
+                  mode="vertical"
+                  defaultSelectedKeys={["0"]}
+                  items={listSideMenu}
+                  theme="light"
+                  style={{ border: "unset" }}
+                />
+              </Sider>
+            </Col>
+          )}
 
-          <Col span={18}>
+          <Col xs={24} md={18}>
             <Content>
-              <Row>
+              <Row style={{ marginBottom: "21px" }}>
                 <h2 style={{ margin: "unset" }}>Hot Games</h2>
               </Row>
-              <Row gutter={[16, 16]}>
-                <Col span={12}>
-                  <Card
-                    bordered={false}
-                    cover={<img src="content_mahjong.png" alt="Mahjong" />} // Replace with actual image
-                    style={{ maxWidth: "490px" }}
-                  >
-                    <Meta
-                      description={
-                        <div
-                           style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            gap: "17px",
-                          }}
-                        >
-                          <img src="app_mahjong.png" alt="Mahjong icon" /> {/* Icon Image */}
-                          <div>
-                            <h4 style={{ margin: "unset" }}>Mahjong Ways</h4>
-                            <p>
-                              4TECH™ has just launched their very first Mahjong inspired slot machine game…
-                            </p>
+              {isMobile ? (
+                <Carousel>
+                  <div>
+                    <Card
+                      bordered={false}
+                      cover={<img src="content_mahjong.png" alt="Mahjong" />}
+                      style={{ maxWidth: "100%" }}
+                    >
+                      <Meta
+                        description={
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              gap: "17px",
+                            }}
+                          >
+                            <img src="app_mahjong.png" alt="Mahjong icon" />
+                            <div>
+                              <h4 style={{ margin: "unset" }}>Mahjong Ways</h4>
+                              <p>
+                                4TECH™ has just launched their very first
+                                Mahjong inspired slot machine game…
+                              </p>
+                            </div>
+                            <Button>View</Button>
                           </div>
-                          <Button>View</Button>
-                        </div>
+                        }
+                      />
+                    </Card>
+                  </div>
+                  <div>
+                    <Card
+                      bordered={false}
+                      cover={
+                        <img src="content_bandito.png" alt="Wild Bandito" />
                       }
-                    />
-                  </Card>
-                </Col>
-                <Col span={12}>
-                  <Card
-                    bordered={false}
-                    cover={<img src="content_bandito.png" alt="Wild Bandito" />} // Replace with actual image
-                    style={{ maxWidth: "490px" }}
-                  >
-                    <Meta
-                      description={
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            gap: "17px",
-                          }}
-                        >
-                          <img src="app_mahjong.png" alt="Wild Bandito icon" /> {/* Icon Image */}
-                          <div>
-                            <h4 style={{ margin: "unset" }}>Wild Bandito</h4>
-                            <p>
-                              Millions will be rewarded for the most wanted bandits capture!
-                            </p>
+                      style={{ maxWidth: "100%" }}
+                    >
+                      <Meta
+                        description={
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              gap: "17px",
+                            }}
+                          >
+                            <img
+                              src="app_mahjong.png"
+                              alt="Wild Bandito icon"
+                            />
+                            <div>
+                              <h4 style={{ margin: "unset" }}>Wild Bandito</h4>
+                              <p>
+                                Millions will be rewarded for the most wanted
+                                bandits capture!
+                              </p>
+                            </div>
+                            <Button>View</Button>
                           </div>
-                          <Button>View</Button>
-                        </div>
-                      }
-                    />
-                  </Card>
-                </Col>
-              </Row>
+                        }
+                      />
+                    </Card>
+                  </div>
+                </Carousel>
+              ) : (
+                <Row gutter={[16, 16]}>
+                  <Col xs={24} sm={12}>
+                    <Card
+                      bordered={false}
+                      cover={<img src="content_mahjong.png" alt="Mahjong" />} // Replace with actual image
+                      style={{ maxWidth: "100%" }}
+                    >
+                      <Meta
+                        description={
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              gap: "17px",
+                            }}
+                          >
+                            <img src="app_mahjong.png" alt="Mahjong icon" />{" "}
+                            {/* Icon Image */}
+                            <div>
+                              <h4 style={{ margin: "unset" }}>Mahjong Ways</h4>
+                              <p>
+                                4TECH™ has just launched their very first
+                                Mahjong inspired slot machine game…
+                              </p>
+                            </div>
+                            <Button>View</Button>
+                          </div>
+                        }
+                      />
+                    </Card>
+                  </Col>
+                  <Col xs={24} sm={12}>
+                    <Card
+                      bordered={false}
+                      cover={
+                        <img src="content_bandito.png" alt="Wild Bandito" />
+                      } // Replace with actual image
+                      style={{ maxWidth: "100%" }}
+                    >
+                      <Meta
+                        description={
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              gap: "17px",
+                            }}
+                          >
+                            <img
+                              src="app_mahjong.png"
+                              alt="Wild Bandito icon"
+                            />{" "}
+                            {/* Icon Image */}
+                            <div>
+                              <h4 style={{ margin: "unset" }}>Wild Bandito</h4>
+                              <p>
+                                Millions will be rewarded for the most wanted
+                                bandits capture!
+                              </p>
+                            </div>
+                            <Button>View</Button>
+                          </div>
+                        }
+                      />
+                    </Card>
+                  </Col>
+                </Row>
+              )}
             </Content>
-
             <Content>
-              <Row>
+              <Row style={{ marginTop: "21px", marginBottom: "21px" }}>
                 <h2 style={{ margin: "unset" }}>Hottest Category</h2>
               </Row>
               <Row gutter={[16, 16]}>
-                <Col span={12}>
+                <Col xs={24} sm={12}>
                   <Card
                     style={{
                       background: "rgba(0, 0, 0, 0.05)",
                     }}
                   >
-                    <h3>Music</h3>
-                    <p>Music makes everything better, and these games will prove it.</p>
+                    <Meta
+                      description={
+                        <Row style={{ display: "flex" }}>
+                          <Col span={12}>
+                            <div>
+                              <div
+                                style={{
+                                  background: "#6962f8",
+                                  borderRadius: "10px",
+                                  padding: "15px",
+                                  marginBottom: "21px",
+                                }}
+                              >
+                                <MusicIconItem />
+                                <h3
+                                  style={{
+                                    color: "#ffff",
+                                    margin: "unset",
+                                  }}
+                                >
+                                  Music
+                                </h3>
+                                <p
+                                  style={{
+                                    color: "#ffff",
+                                  }}
+                                >
+                                  Music makes everything better, and these games
+                                  will prove it.
+                                </p>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  width: "210px",
+                                  gap: "20px",
+                                }}
+                              >
+                                <img
+                                  src="app_icon_01.jpg"
+                                  style={{ width: "82px", height: "82px" }}
+                                />
+                                <img
+                                  src="app_icon_02.jpg"
+                                  style={{ width: "82px", height: "82px" }}
+                                />
+                              </div>
+                            </div>
+                          </Col>
+                          <Col span={12}>
+                            <div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  width: "210px",
+                                  gap: "20px",
+                                  marginBottom: "21px",
+                                }}
+                              >
+                                <img
+                                  src="app_icon_03.jpg"
+                                  style={{ width: "82px", height: "82px" }}
+                                />
+                                <img
+                                  src="app_icon_04.jpg"
+                                  style={{ width: "82px", height: "82px" }}
+                                />
+                              </div>
+                              <img
+                                src="Music_pic.jpg"
+                                style={{ width: "100%" }}
+                              />
+                            </div>
+                          </Col>
+                        </Row>
+                      }
+                    />
                   </Card>
                 </Col>
-                <Col span={12}>
+                <Col xs={24} sm={12}>
                   <Card
                     style={{
                       background: "rgba(0, 0, 0, 0.05)",
                     }}
                   >
-                    <h3>Table Games</h3>
-                    <p>The classic table games for gentlemen and ladies.</p>
+                    <Meta
+                      description={
+                        <Row style={{ display: "flex" }}>
+                          <Col span={12}>
+                            <div>
+                              <div
+                                style={{
+                                  background: "#09796a",
+                                  borderRadius: "10px",
+                                  padding: "15px",
+                                  marginBottom: "21px",
+                                }}
+                              >
+                                <PokerIconItem />
+                                <h3
+                                  style={{
+                                    color: "#ffff",
+                                    margin: "unset",
+                                  }}
+                                >
+                                  Table Games
+                                </h3>
+                                <p
+                                  style={{
+                                    color: "#ffff",
+                                  }}
+                                >
+                                  The classic table games for the gentlement and
+                                  ladies
+                                </p>
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  width: "210px",
+                                  gap: "20px",
+                                }}
+                              >
+                                <img
+                                  src="app_icon_01.jpg"
+                                  style={{ width: "82px", height: "82px" }}
+                                />
+                                <img
+                                  src="app_icon_02.jpg"
+                                  style={{ width: "82px", height: "82px" }}
+                                />
+                              </div>
+                            </div>
+                          </Col>
+                          <Col span={12}>
+                            <div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  width: "210px",
+                                  gap: "20px",
+                                  marginBottom: "21px",
+                                }}
+                              >
+                                <img
+                                  src="app_icon_03.jpg"
+                                  style={{ width: "82px", height: "82px" }}
+                                />
+                                <img
+                                  src="app_icon_04.jpg"
+                                  style={{ width: "82px", height: "82px" }}
+                                />
+                              </div>
+                              <img
+                                src="Music_pic.jpg"
+                                style={{ width: "100%" }}
+                              />
+                            </div>
+                          </Col>
+                        </Row>
+                      }
+                    />
                   </Card>
                 </Col>
               </Row>
