@@ -7,20 +7,12 @@ import SideMenuHome from "./Components/Icons/SideMenuHome";
 import SideMenuTimeLine from "./Components/Icons/SideMenuTimeLine";
 import SideMenuAllGames from "./Components/Icons/SideMenuAllGames";
 import Meta from "antd/es/card/Meta";
-// import MusicIcon from "./Components/MusicIcon";
 
 function App() {
   const WhiteLogoItem = (props) => <Icon component={WhiteLogo} {...props} />;
-  const SideMenuHomeItem = (props) => (
-    <Icon component={SideMenuHome} {...props} />
-  );
-  const SideMenuTimeLineItem = (props) => (
-    <Icon component={SideMenuTimeLine} {...props} />
-  );
-  const SideMenuAllGamesItem = (props) => (
-    <Icon component={SideMenuAllGames} {...props} />
-  );
-  // const MusicIconItem = (props) => <Icon component={MusicIcon} {...props} />;
+  const SideMenuHomeItem = (props) => <Icon component={SideMenuHome} {...props} />;
+  const SideMenuTimeLineItem = (props) => <Icon component={SideMenuTimeLine} {...props} />;
+  const SideMenuAllGamesItem = (props) => <Icon component={SideMenuAllGames} {...props} />;
 
   const listSideMenu = [
     { key: 1, icon: <SideMenuHomeItem />, label: "Games Home" },
@@ -60,19 +52,20 @@ function App() {
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={[1]}
+          defaultSelectedKeys={["1"]}
           style={{ backgroundColor: "transparent" }}
           items={menuItem}
         />
       </Header>
 
+      {/* Carousel */}
       <Content
         style={{
           overflow: "hidden",
         }}
       >
         <img
-          src="Container.jpg"
+          src="Container.jpg" // Replace with the appropriate image path
           style={{
             width: "100%",
             objectFit: "cover",
@@ -84,7 +77,7 @@ function App() {
       <Layout
         style={{
           padding: "24px 50px",
-          backgroundColor: "#ffff",
+          backgroundColor: "#ffffff",
           justifyContent: "space-around",
         }}
       >
@@ -93,7 +86,7 @@ function App() {
             <Sider
               width="100%"
               style={{
-                background: "#ffff",
+                background: "#ffffff",
               }}
             >
               <Input
@@ -118,56 +111,83 @@ function App() {
           <Col span={18}>
             <Content>
               <Row>
-                <h2 style={{ margin: "unset" }}>Hot games</h2>
+                <h2 style={{ margin: "unset" }}>Hot Games</h2>
               </Row>
               <Row gutter={[16, 16]}>
-                {[1, 2].map((item) => (
-                  <Col span={12} key={item}>
-                    <Card
-                      bordered={false}
-                      cover={<img src="content_mahjong.png" alt="Mahjong" />}
-                      style={{ maxWidth: "490px" }}
-                    >
-                      <Meta
-                        description={
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                              gap: "17px",
-                            }}
-                          >
-                            <img src="app_mahjong.png" alt="Mahjong icon" />
-                            <div>
-                              <h4 style={{ margin: "unset" }}>Mahjong way</h4>
-                              <p>
-                                4TECH™ has just launched their very first
-                                Mahjong inspired slot machine game…
-                              </p>
-                            </div>
-                            <Button>View</Button>
+                <Col span={12}>
+                  <Card
+                    bordered={false}
+                    cover={<img src="content_mahjong.png" alt="Mahjong" />} // Replace with actual image
+                    style={{ maxWidth: "490px" }}
+                  >
+                    <Meta
+                      description={
+                        <div
+                           style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            gap: "17px",
+                          }}
+                        >
+                          <img src="app_mahjong.png" alt="Mahjong icon" /> {/* Icon Image */}
+                          <div>
+                            <h4 style={{ margin: "unset" }}>Mahjong Ways</h4>
+                            <p>
+                              4TECH™ has just launched their very first Mahjong inspired slot machine game…
+                            </p>
                           </div>
-                        }
-                      />
-                    </Card>
-                  </Col>
-                ))}
+                          <Button>View</Button>
+                        </div>
+                      }
+                    />
+                  </Card>
+                </Col>
+                <Col span={12}>
+                  <Card
+                    bordered={false}
+                    cover={<img src="content_bandito.png" alt="Wild Bandito" />} // Replace with actual image
+                    style={{ maxWidth: "490px" }}
+                  >
+                    <Meta
+                      description={
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            gap: "17px",
+                          }}
+                        >
+                          <img src="app_mahjong.png" alt="Wild Bandito icon" /> {/* Icon Image */}
+                          <div>
+                            <h4 style={{ margin: "unset" }}>Wild Bandito</h4>
+                            <p>
+                              Millions will be rewarded for the most wanted bandits capture!
+                            </p>
+                          </div>
+                          <Button>View</Button>
+                        </div>
+                      }
+                    />
+                  </Card>
+                </Col>
               </Row>
             </Content>
 
             <Content>
               <Row>
-                <h2 style={{ margin: "unset" }}>Hottes games</h2>
+                <h2 style={{ margin: "unset" }}>Hottest Category</h2>
               </Row>
-              <Row>
+              <Row gutter={[16, 16]}>
                 <Col span={12}>
                   <Card
                     style={{
                       background: "rgba(0, 0, 0, 0.05)",
                     }}
                   >
-                   
+                    <h3>Music</h3>
+                    <p>Music makes everything better, and these games will prove it.</p>
                   </Card>
                 </Col>
                 <Col span={12}>
@@ -175,7 +195,10 @@ function App() {
                     style={{
                       background: "rgba(0, 0, 0, 0.05)",
                     }}
-                  ></Card>
+                  >
+                    <h3>Table Games</h3>
+                    <p>The classic table games for gentlemen and ladies.</p>
+                  </Card>
                 </Col>
               </Row>
             </Content>
@@ -206,7 +229,7 @@ function App() {
             <p>Valletta Buildings, South Street, Valletta - VLT 1103 Malta</p>
           </Col>
           <Col span={3}>
-            <h3>Web map</h3>
+            <h3>Web Map</h3>
             {["Home", "Games", "Math", "Company", "Events", "Partners"].map(
               (item) => (
                 <p key={item}>{item}</p>
@@ -214,7 +237,7 @@ function App() {
             )}
           </Col>
           <Col span={3}>
-            <h3>About us</h3>
+            <h3>About Us</h3>
             {[
               "Licensing",
               "Certification",
@@ -234,7 +257,7 @@ function App() {
             )}
           </Col>
           <Col span={3}>
-            <h3>Our partners</h3>
+            <h3>Our Partners</h3>
             {["Relaxing", "Leander Games"].map((item) => (
               <p key={item}>{item}</p>
             ))}
