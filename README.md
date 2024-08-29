@@ -18,3 +18,8 @@ Ensure you have the following installed:
 - Node.js (>= 14.x)
 - npm (>= 6.x) or yarn
 
+### How to run
+- please clone this project by using this command: git clone
+- cd demo-test-ui-2024
+- yarn install
+- yarn dev
