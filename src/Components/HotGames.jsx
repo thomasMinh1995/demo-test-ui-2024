@@ -48,7 +48,7 @@ export default function HotGames() {
             <Card
               bordered={false}
               cover={<img src="content_bandito.png" alt="Wild Bandito" />}
-              style={{ maxWidth: "100%" }}
+              style={{ maxWidth: "100%", boxShadow: "unset" }}
             >
               <Meta
                 description={
