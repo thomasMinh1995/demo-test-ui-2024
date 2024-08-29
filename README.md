@@ -1,4 +1,4 @@
-# My Ant Design App
+# My Ant Design App 
 
 This project is a responsive web application built using React and Ant Design. 
 
@@ -27,3 +27,4 @@ Ensure you have the following installed:
 - This project is still updating. I will try to complete UI ASAP
 - I'm applying Ant-design to make it responsive. In the future, I will learning the CSS core or SCSS to improve my FE tech stack.
 - You can learn the Ant-design throught this link: https://ant.design/components/overview
+- On the public folder, you can see the UI design from 2 files: "Home.png" and "Homemd.png"
