@@ -14,9 +14,11 @@ import SideMenuHome from "./Components/Icons/SideMenuHome";
 import SideMenuTimeLine from "./Components/Icons/SideMenuTimeLine";
 import SideMenuAllGames from "./Components/Icons/SideMenuAllGames";
 import FooterComponent from "./Components/FooterComponent";
-import HotGames from "./Components/HotGames";
-import HottesCategory from "./Components/HottesCategory";
-import HeaderComponent from "./Components/HeaderComponent";
+import { lazy } from "react";
+
+const HeaderComponent = lazy(() => import("./Components/HeaderComponent"))
+const HotGames = lazy(() => import('./Components/HotGames'))
+const HottesCategory = lazy(() => import('./Components/HottesCategory'))
 
 const { useBreakpoint } = Grid;
 

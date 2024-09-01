@@ -26,15 +26,17 @@ export default function HottesCategory() {
                     borderRadius: "10px",
                     padding: "15px",
                     marginBottom: "21px",
+                    maxWidth: isMobile ? '167px' : '210px',
+                    height: isMobile ? '167px' : '210px'
                   }}
                 >
                   {icon}
                   <h3 style={{ color: "#ffff", margin: "unset" }}>{title}</h3>
                   <p style={{ color: "#ffff" }}>{description}</p>
                 </div>
-                <div style={{ display: "flex", width: "210px", gap: "20px" }}>
-                  <img src={images[0]} style={{ width: "82px", height: "82px" }} />
-                  <img src={images[1]} style={{ width: "82px", height: "82px" }} />
+                <div style={{ display: "flex", maxidth: "210px", gap: "20px" }}>
+                  <img src={images[0]} style={{ width: isMobile ? "75px" : "82px", height: isMobile ? "75px" : "82px" }} />
+                  <img src={images[1]} style={{ width: isMobile ? "75px" : "82px", height: isMobile ? "75px" : "82px" }} />
                 </div>
               </div>
             </Col>
@@ -48,8 +50,8 @@ export default function HottesCategory() {
                     marginBottom: "21px",
                   }}
                 >
-                  <img src={images[2]} style={{ width: "82px", height: "82px" }} />
-                  <img src={images[3]} style={{ width: "82px", height: "82px" }} />
+                  <img src={images[2]} style={{ width: isMobile ? "75px" : "82px", height: isMobile ? "75px" : "82px" }} />
+                  <img src={images[3]} style={{ width: isMobile ? "75px" : "82px", height: isMobile ? "75px" : "82px" }} />
                 </div>
                 <img src={mainImage} style={{ width: "100%" }} />
               </div>
@@ -66,7 +68,7 @@ export default function HottesCategory() {
         <h2 style={{ margin: "unset" }}>Hottest Category</h2>
       </Row>
       {isMobile ? (
-        <Carousel autoplay>
+        <Carousel>
           <div>
             {cardContent(
               "#6962f8",
@@ -84,7 +86,7 @@ export default function HottesCategory() {
               "Table Games",
               "The classic table games for the gentlemen and ladies",
               ["app_icon_01.jpg", "app_icon_02.jpg", "app_icon_03.jpg", "app_icon_04.jpg"],
-              "Music_pic.jpg"
+              "3d-pocker_pic.png"
             )}
           </div>
         </Carousel>
@@ -107,7 +109,7 @@ export default function HottesCategory() {
               "Table Games",
               "The classic table games for the gentlemen and ladies",
               ["app_icon_01.jpg", "app_icon_02.jpg", "app_icon_03.jpg", "app_icon_04.jpg"],
-              "Music_pic.jpg"
+              "3d-pocker_pic.png"
             )}
           </Col>
         </Row>
