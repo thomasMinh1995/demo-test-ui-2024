@@ -4,6 +4,7 @@ import Meta from "antd/es/card/Meta";
 import MusicIcon from "./Icons/MusicIcon";
 import PokerIcon from "./Icons/PokerIcon";
 import { Content } from "antd/es/layout/layout";
+import './Carousel.css';
 
 export default function HottesCategory() {
   const { useBreakpoint } = Grid;
