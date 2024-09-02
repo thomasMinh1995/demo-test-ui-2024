@@ -1,30 +1,28 @@
-import Icon from '@ant-design/icons/lib/components/Icon';
-import { Col, Divider, Grid, Menu, Row } from 'antd';
+import { Col, Divider, Grid, Menu, Row, Layout } from 'antd';
 import WhiteLogo from './Icons/WhiteLogo';
-import { Footer } from 'antd/es/layout/layout';
 
-export default function FooterComponent() {
-  const { useBreakpoint } = Grid;
+const { Footer } = Layout;
+
+const FooterComponent = () => {
+  const {useBreakpoint}  = Grid;
   const screens = useBreakpoint();
   const isMobile = !screens.md;
-  const WhiteLogoItem = (props) => <Icon component={WhiteLogo} {...props} />;
+
+  const WhiteLogoItem = (props) => (
+    <WhiteLogo style={{ height: '32px', color: isMobile ? '#A59E9E' : 'rgba(165, 158, 158, 1)' }} {...props} />
+  );
 
   return (
-    <>
+    <Footer style={isMobile ? { background: "#fff", padding: "16px" } : { background: "rgba(255, 255, 255, 1)", padding: "0 50px" }}>
+      <Row gutter={[16, 16]} style={isMobile ? {} : { justifyContent: "center" }}>
+        <Col span={24} md={12}>
+          <WhiteLogoItem />
+          <p style={{ fontSize: isMobile ? "12px" : "inherit", color: isMobile ? "#A59E9E" : "inherit" }}>
+            Valletta Buildings, South Street, Valletta - VLT 1103 Malta
+          </p>
+        </Col>
         {isMobile ? (
-        <Footer style={{ background: "#fff", padding: "16px" }}>
-          <Row gutter={[16, 16]}>
-            <Col span={24}>
-              <WhiteLogoItem style={{ color: "#A59E9E", height: "32px" }} />
-              <p style={{ fontSize: "12px", color: "#A59E9E" }}>
-                Valletta Buildings, South Street, Valletta - VLT 1103 Malta
-              </p>
-              <p style={{ fontSize: "12px", color: "#A59E9E" }}>
-                COPYRIGHT © 2015-2024 ALL RIGHTS RESERVED.
-              </p>
-            </Col>
-          </Row>
-          <Row gutter={[16, 16]}>
+          <>
             <Col span={24}>
               <Menu
                 mode="vertical"
@@ -38,32 +36,19 @@ export default function FooterComponent() {
                 ]}
               />
             </Col>
-          </Row>
-        </Footer>
-      ) : (
-        <Footer
-          style={{
-            background: "rgba(255, 255, 255, 1)",
-            width: "100%",
-            padding: "0 50px",
-          }}
-        >
-          <Row gutter={[16, 16]} style={{ justifyContent: "center" }}>
-            <Col span={12}>
-              <WhiteLogoItem
-                style={{
-                  stroke: "rgba(165, 158, 158, 1)",
-                }}
-              />
-              <p>Valletta Buildings, South Street, Valletta - VLT 1103 Malta</p>
+            <Col span={24}>
+              <p style={{ fontSize: "12px", color: "#A59E9E" }}>
+                COPYRIGHT © 2015-2024 ALL RIGHTS RESERVED.
+              </p>
             </Col>
+          </>
+        ) : (
+          <>
             <Col span={3}>
               <h3>Web Map</h3>
-              {["Home", "Games", "Math", "Company", "Events", "Partners"].map(
-                (item) => (
-                  <p key={item}>{item}</p>
-                )
-              )}
+              {["Home", "Games", "Math", "Company", "Events", "Partners"].map(item => (
+                <p key={item}>{item}</p>
+              ))}
             </Col>
             <Col span={3}>
               <h3>About Us</h3>
@@ -73,31 +58,31 @@ export default function FooterComponent() {
                 "Responsible Gaming",
                 "Exhibitions",
                 "Copyright Protection",
-              ].map((item) => (
+              ].map(item => (
                 <p key={item}>{item}</p>
               ))}
             </Col>
             <Col span={3}>
               <h3>Events</h3>
-              {["PG ICE 2017", "PG ICE 2018", "PG ICE 2019", "About ICE"].map(
-                (item) => (
-                  <p key={item}>{item}</p>
-                )
-              )}
-            </Col>
-            <Col span={3}>
-              <h3>Our Partners</h3>
-              {["Relaxing", "Leander Games"].map((item) => (
+              {["PG ICE 2017", "PG ICE 2018", "PG ICE 2019", "About ICE"].map(item => (
                 <p key={item}>{item}</p>
               ))}
             </Col>
-          </Row>
-          <Divider />
-          <Row>
-            <p>COPYRIGHT © 2015-2024 ALL RIGHTS RESERVED.</p>
-          </Row>
-        </Footer>
-      )}
-    </>
-  )
-}
+            <Col span={3}>
+              <h3>Our Partners</h3>
+              {["Relaxing", "Leander Games"].map(item => (
+                <p key={item}>{item}</p>
+              ))}
+            </Col>
+            <Col span={12} md={24} style={{ textAlign: 'center' }}>
+              <Divider />
+              <p>COPYRIGHT © 2015-2024 ALL RIGHTS RESERVED.</p>
+            </Col>
+          </>
+        )}
+      </Row>
+    </Footer>
+  );
+};
+
+export default FooterComponent;

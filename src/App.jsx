@@ -13,12 +13,12 @@ import Sider from "antd/es/layout/Sider";
 import SideMenuHome from "./Components/Icons/SideMenuHome";
 import SideMenuTimeLine from "./Components/Icons/SideMenuTimeLine";
 import SideMenuAllGames from "./Components/Icons/SideMenuAllGames";
-import FooterComponent from "./Components/FooterComponent";
 import { lazy } from "react";
 
 const HeaderComponent = lazy(() => import("./Components/HeaderComponent"))
 const HotGames = lazy(() => import('./Components/HotGames'))
 const HottesCategory = lazy(() => import('./Components/HottesCategory'))
+const FooterComponent =lazy(() =>  import('./Components/FooterComponent'))
 
 const { useBreakpoint } = Grid;
 
